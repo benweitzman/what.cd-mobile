@@ -13,9 +13,9 @@
 
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <!-- <link rel="stylesheet" href="css/style.css?v=2"> -->
   <link href="css/bootstrap.css" rel="stylesheet" media="screen">
   <link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="css/style.css?v=2">
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,15 +23,41 @@
 </head>
 <body>
   <script type="text/x-handlebars" data-template-name="application">
-    <div class="container">
+    {{#if App.ApplicationController.loggedIn}}
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#/">What.CD</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><a href="">Home</a></li>
+                <li><a href="">Torrents</a></li>
+                <li><a href="">Forums</a></li>
+                <li><a href="">Subscriptions</a></li>
+                <li><a href="">Inbox</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="">Username</a></li>
+                <li><a href="">Logout</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    <div id="app-container" class="container-fluid">
       {{outlet}}
     </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
     {{#if App.ApplicationController.loggedIn}}
-      <h1>What.CD</h1>
-      Logged in!
+      <h2>Logged in! Put news and stuff here</h2>
     {{else}}
       <h1>What.CD</h1>
       <a href="#/login">Log In</a>
