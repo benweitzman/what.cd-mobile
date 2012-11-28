@@ -14,7 +14,8 @@
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <!-- <link rel="stylesheet" href="css/style.css?v=2"> -->
-  <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+  <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,7 +23,9 @@
 </head>
 <body>
   <script type="text/x-handlebars" data-template-name="application">
-    {{outlet}}
+    <div class="container">
+      {{outlet}}
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
@@ -32,8 +35,15 @@
 
   <script type="text/x-handlebars" data-template-name="login-form">
     <h1>Login</h1>
-    Username<br/>
-    Password
+    <form id="login-form">
+      <input type="text" name="username" id="login-username" placeholder="username" /><br />
+      <input type="password" name="password" id="login-password" placeholder="password" /><br />
+      <input class="btn btn-large btn-primary" type="submit" value="Login" />
+    </form>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="home">
+    <h1>You are logged in!</h1>
   </script>
 
   <!-- The missing protocol means that it will match the current protocol, either http or https. If running locally, we use the local jQuery. -->
@@ -42,8 +52,7 @@
   <script src="js/libs/handlebars-1.0.0.beta.6.js"></script>
   <script src="js/libs/ember-1.0.0-pre.2.min.js"></script>
   <script src="js/libs/bootstrap.min.js"></script>
-  <!-- https://github.com/deoxxa/whatcd -->
-  <script src="js/libs/whatcd.js"></script>
+  <script src="js/whatcd.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

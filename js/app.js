@@ -26,6 +26,16 @@ App.Router = Ember.Router.extend({
       }
     })
   })
-})
+});
 
 App.initialize();
+
+$('#login-form').live('submit', function(e) {
+  var username = $('#login-username').val();
+  var password = $('#login-password').val();
+  loginUser(username, password, function() {
+    testLogin();
+    // redirect to front page
+  });
+  return false;
+});
