@@ -40,8 +40,15 @@ $('#login-form').live('submit', function(e) {
   var username = $('#login-username').val();
   var password = $('#login-password').val();
   loginUser(username, password, function() {
-    testLogin();
-    // redirect to front page
+    testLogin(function(isAuthed) {
+      App.ApplicationController.loggedIn = isAuthed;
+      if (isAuthed) {
+        // redirect to index
+        App.get('router').transitionTo('root.index');
+      } else {
+        // do something to show invalid login and maybe number of attempts left
+      }
+    });
   });
   return false;
 });

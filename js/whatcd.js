@@ -1,4 +1,6 @@
 function loginUser(username, password, success, error) {
+  // success(); return false; // debug without live gazelle
+
   $.ajax({
     url: '../login.php',
     type: 'POST',
