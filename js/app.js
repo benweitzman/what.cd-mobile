@@ -1,11 +1,14 @@
 var App = Ember.Application.create();
 
-App.ApplicationController = Ember.Controller.extend();
+App.ApplicationController = Ember.Controller.extend({
+  loggedIn: false
+});
+
 App.ApplicationView = Ember.View.extend({
   templateName: 'application'
 });
 App.IndexView = Ember.View.extend({
-  templateName: 'index'
+  templateName: 'index',
 });
 App.LoginFormView = Ember.View.extend({
   templateName: 'login-form'
@@ -16,6 +19,9 @@ App.Router = Ember.Router.extend({
     index: Ember.Route.extend({
       route: '/',
       connectOutlets: function(router) {
+        testLogin(function(isAuthed) {
+          App.ApplicationController.loggedIn = isAuthed;
+        });
         router.get('applicationController').connectOutlet('index');
       }
     }),

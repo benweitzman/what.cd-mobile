@@ -20,7 +20,11 @@ function loginUser(username, password, success, error) {
   return false;
 }
 
-function testLogin() {
+function testLogin(callback) {
+  // callback is called with true for logged in
+  // or false for not
+
+  // callback(true); return; // debug without live gazelle
   $.ajax({
     url: '../ajax.php',
     type: 'GET',
@@ -31,9 +35,15 @@ function testLogin() {
     success: function(data) {
       console.log(data);
       console.log('logged in');
+      if (typeof callback === 'function') {
+        callback(true);
+      }
     },
     error: function(xhr, status) {
       console.log('not logged in');
+      if (typeof callback === 'function') {
+        callback(false);
+      }
     },
   });
 }

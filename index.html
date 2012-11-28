@@ -29,8 +29,13 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
-    <h1>What.CD</h1>
-    <a href="#/login">Log In</a>
+    {{#if App.ApplicationController.loggedIn}}
+      <h1>What.CD</h1>
+      Logged in!
+    {{else}}
+      <h1>What.CD</h1>
+      <a href="#/login">Log In</a>
+    {{/if}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="login-form">
