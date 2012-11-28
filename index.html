@@ -24,39 +24,43 @@
 <body>
   <script type="text/x-handlebars" data-template-name="application">
     {{#if App.ApplicationController.loggedIn}}
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container-fluid">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="#/">What.CD</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li class="active"><a href="">Home</a></li>
-                <li><a href="">Torrents</a></li>
-                <li><a href="">Forums</a></li>
-                <li><a href="">Subscriptions</a></li>
-                <li><a href="">Inbox</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="">Username</a></li>
-                <li><a href="">Logout</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </div>
-      </div>
     {{/if}}
     <div id="app-container" class="container-fluid">
       {{outlet}}
     </div>
   </script>
 
+  <script type="text/x-handlebars" data-template-name="navbar">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#/">What.CD</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="">Home</a></li>
+              <li><a href="">Torrents</a></li>
+              <li><a href="">Forums</a></li>
+              <li><a href="">Subscriptions</a></li>
+              <li><a href="">Inbox</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li><a href="">Username</a></li>
+              <li><a href="">Logout</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+  </script>
+
   <script type="text/x-handlebars" data-template-name="index">
     {{#if App.ApplicationController.loggedIn}}
+      {{view App.NavbarView}}
       <h2>Logged in! Put news and stuff here</h2>
     {{else}}
       <h1>What.CD</h1>

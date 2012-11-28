@@ -5,7 +5,10 @@ App.ApplicationController = Ember.Controller.extend({
 });
 
 App.ApplicationView = Ember.View.extend({
-  templateName: 'application'
+  templateName: 'application',
+});
+App.NavbarView = Ember.View.extend({
+  templateName: 'navbar',
 });
 App.IndexView = Ember.View.extend({
   templateName: 'index',
