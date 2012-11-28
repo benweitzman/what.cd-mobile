@@ -21,8 +21,8 @@ App.Router = Ember.Router.extend({
       connectOutlets: function(router) {
         testLogin(function(isAuthed) {
           App.ApplicationController.loggedIn = isAuthed;
+          router.get('applicationController').connectOutlet('index');
         });
-        router.get('applicationController').connectOutlet('index');
       }
     }),
     login: Ember.Route.extend({
