@@ -10,7 +10,7 @@ function loginUser(username, password, success, error) {
     },
     success: function(data) {
       if (typeof success === 'function') {
-        success();
+        success(data);
       }
     },
     error: function(xhr, status) {
@@ -38,7 +38,7 @@ function testLogin(callback) {
       console.log(data);
       console.log('logged in');
       if (typeof callback === 'function') {
-        callback(true);
+        callback(true, data);
       }
     },
     error: function(xhr, status) {
@@ -47,5 +47,18 @@ function testLogin(callback) {
         callback(false);
       }
     },
+  });
+}
+
+function logout(authkey,callback) {
+  $.ajax({
+    url:'../logout.php',
+    method:'GET',
+    data:{
+      auth:authkey,
+    },
+    success: function (data) {
+      callback();
+    }
   });
 }
