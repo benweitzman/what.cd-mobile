@@ -1,6 +1,6 @@
 function loginUser(username, password, success, error) {
   $.ajax({
-    url: '/login.php',
+    url: '../login.php',
     type: 'POST',
     data: {
       username: $('#login-username').val(),
@@ -22,7 +22,7 @@ function loginUser(username, password, success, error) {
 
 function testLogin() {
   $.ajax({
-    url: '/ajax.php',
+    url: '../ajax.php',
     type: 'GET',
     dataType: 'json',
     data: {
