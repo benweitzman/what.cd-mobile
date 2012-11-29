@@ -7,7 +7,7 @@ Best way to run when running a gazelle sandbox:
 
 ```
 cd /path/to/gazelle/
-ln -s /path/to/this/project/ /path/to/gazelle/mobile/
+git clone git@github.com:benweitzman/what.cd-mobile mobile
 ```
 
 Then visit http://localhost/mobile/ in your browser, assuming you run gazelle on localhost port 80.
