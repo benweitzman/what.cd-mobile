@@ -1,3 +1,6 @@
+<?
+  require '../classes/config.php';
+?>
 <!doctype html>
 <!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]--> <!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]--> <!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]--> <!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
@@ -27,6 +30,15 @@
     {{/if}}
     <div id="app-container" class="container-fluid">
       {{outlet}}
+      <?
+        if (constant("DEBUG_MODE")) {
+          ob_start();
+          exec("git log -1 --pretty=format:'%h'",$result);
+          if (isset($result[0])) { $result = $result[0]; } else { $result = ""; }
+          ob_clean();
+          print '<div class="version">'.$result.'</div>';
+        }
+      ?>
     </div>
   </script>
 
