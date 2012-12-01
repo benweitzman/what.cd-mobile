@@ -5,7 +5,8 @@ User = Ember.Object.extend({
 });
 
 News = Ember.Object.extend({
-	announcements:null
+	announcements:null,
+	blogs:null
 });
 
 Info = Ember.Object.extend({
@@ -37,6 +38,9 @@ App.LoginFormView = Ember.View.extend({
 App.AlertsView = Ember.View.extend({
 	templateName:'alerts',
 });
+App.NewsView= Ember.View.extend({
+	templateName:'news',
+});
 
 App.Router = Ember.Router.extend({
 	root:Ember.Route.extend({
@@ -50,6 +54,9 @@ App.Router = Ember.Router.extend({
 						App.ApplicationController.authkey = data.response.authkey;
 						getInfo(function (data) {
 							App.ApplicationController.info = Info.create({messages:data.response.notifications.messages, notifications:data.response.notifications.notifications, subscriptions:data.response.notifications.subscriptions});
+						});
+						getNews(function (data) {
+							App.ApplicationController.news = News.create({announcements:data.response.announcements, blogs:data.response.blogPosts});
 						});
 					} else {
 						App.ApplicationController.user = null;

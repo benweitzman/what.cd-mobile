@@ -87,11 +87,10 @@ require '../classes/config.php';
 <script type="text/x-handlebars" data-template-name="index">
     {{#if App.ApplicationController.loggedIn}}
     	{{view App.NavbarView}}
-
 		{{#if App.ApplicationController.info.messages}}
     		{{view App.AlertsView}}
     	{{/if}}
-    <h2>Logged in! Put news and stuff here</h2>
+    	{{view App.NewsView}}
     {{else}}
 		<h1>What.CD</h1>
 		<a href="#/login">Log In</a>
@@ -118,6 +117,31 @@ require '../classes/config.php';
 	        <strong>{{App.ApplicationController.info.notifications}}</strong> notification.
         {{/if}}
 	</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="news">
+	{{#if App.ApplicationController.news.announcements}}
+    <h3>Announcements</h3>
+    <ul class="news" style="list-style: none;">
+        {{#each announcement in App.ApplicationController.news.announcements}}
+        <li class="news-item nobullet">
+            <h4>{{announcement.title}}</h4>
+            {{{announcement.body}}}
+        </li>
+        {{/each}}
+    </ul>
+	{{/if}}
+    {{#if App.ApplicationController.news.blogs}}
+    <h3>Blog</h3>
+    <ul class="news" style="list-style: none;">
+        {{#each blog in App.ApplicationController.news.blogs}}
+        <li class="news-item nobullet">
+            <h4>{{blog.title}}</h4>
+            {{{blog.body}}}
+        </li>
+        {{/each}}
+    </ul>
+	{{/if}}
 </script>
 
 <!-- The missing protocol means that it will match the current protocol, either http or https. If running locally, we use the local jQuery. -->

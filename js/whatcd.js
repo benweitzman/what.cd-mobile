@@ -86,6 +86,7 @@ function getNews(callback) {
 		data:{
 			action:'announcements'
 		},
+		async:false,
 		success:function (data) {
 			if (typeof callback === 'function') {
 				callback(data);
