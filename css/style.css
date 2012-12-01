@@ -1,3 +1,11 @@
 @media (min-width:960px) {
 	#app-container { margin-top: 40px; }
 }
+
+.alert { margin-top: 15px; }
+
+.news { list-style-type: none;}
+
+.news-item h4 { text-decoration:underline }
+
+.news-body { margin-left: 10px;}

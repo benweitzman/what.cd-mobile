@@ -122,22 +122,22 @@ require '../classes/config.php';
 <script type="text/x-handlebars" data-template-name="news">
 	{{#if App.ApplicationController.news.announcements}}
     <h3>Announcements</h3>
-    <ul class="news" style="list-style: none;">
+    <ul class="news">
         {{#each announcement in App.ApplicationController.news.announcements}}
-        <li class="news-item nobullet">
+        <li class="news-item">
             <h4>{{announcement.title}}</h4>
-            {{{announcement.body}}}
+            <div class="news-body">{{{announcement.body}}}</div>
         </li>
         {{/each}}
     </ul>
 	{{/if}}
     {{#if App.ApplicationController.news.blogs}}
     <h3>Blog</h3>
-    <ul class="news" style="list-style: none;">
+    <ul class="news">
         {{#each blog in App.ApplicationController.news.blogs}}
-        <li class="news-item nobullet">
+        <li class="news-item">
             <h4>{{blog.title}}</h4>
-            {{{blog.body}}}
+            <div class="news-body">{{{blog.body}}}</div>
         </li>
         {{/each}}
     </ul>
