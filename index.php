@@ -1,36 +1,36 @@
 <?
-require '../classes/config.php';
+	require '../classes/config.php';
 ?>
 <!doctype html>
-<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]--> <!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]--> <!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]--> <!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]--> <!--[if IE 7 ]><html lang="en" class="ie7"> <![endif]--> <!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]--> <!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html lang="en"> <!--<![endif]-->
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>What.CD</title>
-    <meta name="description" content="What.CD Mobile">
-    <meta name="author" content="What.CD">
+	<title>What.CD</title>
+	<meta name="description" content="What.CD Mobile">
+	<meta name="author" content="What.CD">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="css/style.css?v=2">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+	<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" href="css/style.css?v=2">
 
-    <!--[if lt IE 9]>
+	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<![endif]-->
 </head>
 <body>
 <script type="text/x-handlebars" data-template-name="application">
-    {{#if App.ApplicationController.loggedIn}}
-    {{/if}}
-    <div id="app-container" class="container-fluid">
-        {{outlet}}
+	{{#if App.ApplicationController.loggedIn}}
+	{{/if}}
+	<div id="app-container" class="container-fluid">
+		{{outlet}}
 		<?
 		if (constant("DEBUG_MODE")) {
 			ob_start();
@@ -44,103 +44,103 @@ require '../classes/config.php';
 			print '<div class="version">' . $result . '</div>';
 		}
 		?>
-    </div>
+	</div>
 </script>
 
 <script type="text/x-handlebars" data-template-name="navbar">
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="#/">What.CD</a>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="#/">What.CD</a>
 
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li class="active"><a href="">Home</a></li>
-                        <li><a href="">Torrents</a></li>
-                        <li><a href="">Forums</a></li>
-                        {{#if App.ApplicationController.info.subscriptions}}
-                        	<li><a href=""><strong>Subscriptions</strong></a></li>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="">Home</a></li>
+						<li><a href="">Torrents</a></li>
+						<li><a href="">Forums</a></li>
+						{{#if App.ApplicationController.info.subscriptions}}
+							<li><a href=""><strong>Subscriptions</strong></a></li>
 						{{else}}
-                        	<li><a href="">Subscriptions</a></li>
+							<li><a href="">Subscriptions</a></li>
 						{{/if}}
-                        <li><a href="">Inbox</a></li>
-                    </ul>
-                    <ul class="nav pull-right">
-                        <li id="fat-menu" class="dropdown">
-                            <a href="#" id="user_menu" role="button" class="dropdown-toggle" data-toggle="dropdown">{{App.ApplicationController.user.username}}<b class="caret"></b></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#/logout">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <!--/.nav-collapse -->
-            </div>
-        </div>
-    </div>
+						<li><a href="">Inbox</a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li id="fat-menu" class="dropdown">
+							<a href="#" id="user_menu" role="button" class="dropdown-toggle" data-toggle="dropdown">{{App.ApplicationController.user.username}}<b class="caret"></b></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#/logout">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
 </script>
 <script type="text/x-handlebars" data-template-name="index">
-    {{#if App.ApplicationController.loggedIn}}
-    	{{view App.NavbarView}}
+	{{#if App.ApplicationController.loggedIn}}
+		{{view App.NavbarView}}
 		{{#if App.ApplicationController.info.messages}}
-    		{{view App.AlertsView}}
-    	{{/if}}
-    	{{view App.NewsView}}
-    {{else}}
+			{{view App.AlertsView}}
+		{{/if}}
+		{{view App.NewsView}}
+	{{else}}
 		<h1>What.CD</h1>
 		<a href="#/login">Log In</a>
-    {{/if}}
+	{{/if}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="login-form">
-    <h1>Login</h1>
+	<h1>Login</h1>
 
-    <form id="login-form">
-        <input type="text" name="username" id="login-username" placeholder="username"/><br/>
-        <input type="password" name="password" id="login-password" placeholder="password"/><br/>
-        <input class="btn btn-large btn-primary" type="submit" value="Login"/>
-    </form>
+	<form id="login-form">
+		<input type="text" name="username" id="login-username" placeholder="username"/><br/>
+		<input type="password" name="password" id="login-password" placeholder="password"/><br/>
+		<input class="btn btn-large btn-primary" type="submit" value="Login"/>
+	</form>
 </script>
 
 <script type="text/x-handlebars" data-template-name="alerts">
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        {{#if App.ApplicationController.info.messages}}
-        	<strong>{{App.ApplicationController.info.messages}}</strong> new message.
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		{{#if App.ApplicationController.info.messages}}
+			<strong>{{App.ApplicationController.info.messages}}</strong> new message.
 		{{/if}}
-        {{#if App.ApplicationController.info.notifications}}
-	        <strong>{{App.ApplicationController.info.notifications}}</strong> notification.
-        {{/if}}
+		{{#if App.ApplicationController.info.notifications}}
+			<strong>{{App.ApplicationController.info.notifications}}</strong> notification.
+		{{/if}}
 	</div>
 </script>
 
 <script type="text/x-handlebars" data-template-name="news">
 	{{#if App.ApplicationController.news.announcements}}
-    <h3>Announcements</h3>
-    <ul class="news">
-        {{#each announcement in App.ApplicationController.news.announcements}}
-        <li class="news-item">
-            <h4>{{announcement.title}}</h4>
-            <div class="news-body">{{{announcement.body}}}</div>
-        </li>
-        {{/each}}
-    </ul>
+		<h3>Announcements</h3>
+		<ul class="news">
+			{{#each announcement in App.ApplicationController.news.announcements}}
+				<li class="news-item">
+					<h4>{{announcement.title}}</h4>
+					<div class="news-body">{{{announcement.body}}}</div>
+				</li>
+			{{/each}}
+		</ul>
 	{{/if}}
-    {{#if App.ApplicationController.news.blogs}}
-    <h3>Blog</h3>
-    <ul class="news">
-        {{#each blog in App.ApplicationController.news.blogs}}
-        <li class="news-item">
-            <h4>{{blog.title}}</h4>
-            <div class="news-body">{{{blog.body}}}</div>
-        </li>
-        {{/each}}
-    </ul>
+	{{#if App.ApplicationController.news.blogs}}
+		<h3>Blog</h3>
+		<ul class="news">
+			{{#each blog in App.ApplicationController.news.blogs}}
+				<li class="news-item">
+					<h4>{{blog.title}}</h4>
+					<div class="news-body">{{{blog.body}}}</div>
+				</li>
+			{{/each}}
+		</ul>
 	{{/if}}
 </script>
 

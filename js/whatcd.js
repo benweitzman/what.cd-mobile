@@ -25,8 +25,6 @@ function loginUser(username, password, success, error) {
 function testLogin(callback) {
 	// callback is called with true for logged in
 	// or false for not
-
-	// callback(true); return; // debug without live gazelle
 	$.ajax({
 		url:'../ajax.php',
 		type:'GET',
