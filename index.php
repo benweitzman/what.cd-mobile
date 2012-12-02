@@ -84,13 +84,27 @@
 		</div>
 	</div>
 </script>
+
 <script type="text/x-handlebars" data-template-name="index">
 	{{#if App.ApplicationController.loggedIn}}
 		{{view App.NavbarView}}
 		{{#if App.ApplicationController.info.messages}}
 			{{view App.AlertsView}}
 		{{/if}}
-		{{view App.NewsView}}
+		<h3>Announcements</h3>
+		{{#collection contentBinding="App.NewsController" tagName="ul" class="news"}}
+			<li class="news-item">
+				<h4>{{view.content.title}}</h4>
+				<div class="news-body">{{{view.content.body}}}</div>
+			</li>
+		{{/collection}}
+		<h3>Blog</h3>
+		{{#collection contentBinding="App.BlogController" tagName="ul" class="news"}}
+			<li class="news-item">
+				<h4>{{view.content.title}}</h4>
+				<div class="news-body">{{{view.content.body}}}</div>
+			</li>
+		{{/collection}}
 	{{else}}
 		<h1>What.CD</h1>
 		<a href="#/login">Log In</a>
@@ -117,31 +131,6 @@
 			<strong>{{App.ApplicationController.info.notifications}}</strong> notification.
 		{{/if}}
 	</div>
-</script>
-
-<script type="text/x-handlebars" data-template-name="news">
-	{{#if App.ApplicationController.news.announcements}}
-		<h3>Announcements</h3>
-		<ul class="news">
-			{{#each announcement in App.ApplicationController.news.announcements}}
-				<li class="news-item">
-					<h4>{{announcement.title}}</h4>
-					<div class="news-body">{{{announcement.body}}}</div>
-				</li>
-			{{/each}}
-		</ul>
-	{{/if}}
-	{{#if App.ApplicationController.news.blogs}}
-		<h3>Blog</h3>
-		<ul class="news">
-			{{#each blog in App.ApplicationController.news.blogs}}
-				<li class="news-item">
-					<h4>{{blog.title}}</h4>
-					<div class="news-body">{{{blog.body}}}</div>
-				</li>
-			{{/each}}
-		</ul>
-	{{/if}}
 </script>
 
 <!-- The missing protocol means that it will match the current protocol, either http or https. If running locally, we use the local jQuery. -->

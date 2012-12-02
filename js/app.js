@@ -1,15 +1,10 @@
 var App = Ember.Application.create();
 
-User = Ember.Object.extend({
+App.User = Ember.Object.extend({
 	username:null,
 });
 
-News = Ember.Object.extend({
-	announcements:null,
-	blogs:null
-});
-
-Info = Ember.Object.extend({
+App.Info = Ember.Object.extend({
 	messages:null,
 	notifications:null,
 	subscriptions:null
@@ -22,6 +17,33 @@ App.ApplicationController = Ember.Controller.extend({
 	info:null
 });
 
+App.NewsPost = Ember.Object.extend({
+	title: null,
+	body: null
+});
+
+App.NewsController = Ember.ArrayController.create({
+	content: [],
+
+	createPost: function(newsItem) {
+		var post = App.NewsPost.create({ title: newsItem.title, body: newsItem.body });
+		this.pushObject(post);
+	},
+});
+
+App.BlogPost = Ember.Object.extend({
+	title: null,
+	body: null
+});
+
+App.BlogController = Ember.ArrayController.create({
+	content: [],
+
+	createPost: function(blogItem) {
+		var post = App.NewsPost.create({ title: blogItem.title, body: blogItem.body });
+		this.pushObject(post);
+	},
+});
 
 App.ApplicationView = Ember.View.extend({
 	templateName:'application',
@@ -38,9 +60,6 @@ App.LoginFormView = Ember.View.extend({
 App.AlertsView = Ember.View.extend({
 	templateName:'alerts',
 });
-App.NewsView= Ember.View.extend({
-	templateName:'news',
-});
 
 App.Router = Ember.Router.extend({
 	root:Ember.Route.extend({
@@ -50,13 +69,18 @@ App.Router = Ember.Router.extend({
 				testLogin(function (isAuthed, data) {
 					App.ApplicationController.loggedIn = isAuthed;
 					if (isAuthed) {
-						App.ApplicationController.user = User.create({username:data.response.username});
+						App.ApplicationController.user = App.User.create({username:data.response.username});
 						App.ApplicationController.authkey = data.response.authkey;
 						getInfo(function (data) {
-							App.ApplicationController.info = Info.create({messages:data.response.notifications.messages, notifications:data.response.notifications.notifications, subscriptions:data.response.notifications.subscriptions});
+							App.ApplicationController.info = App.Info.create({messages:data.response.notifications.messages, notifications:data.response.notifications.notifications, subscriptions:data.response.notifications.subscriptions});
 						});
 						getNews(function (data) {
-							App.ApplicationController.news = News.create({announcements:data.response.announcements, blogs:data.response.blogPosts});
+							data.response.announcements.forEach(function(item) {
+								App.NewsController.createPost(item);
+							});
+							data.response.blogPosts.forEach(function(item) {
+								App.BlogController.createPost(item);
+							});
 						});
 					} else {
 						App.ApplicationController.user = null;
@@ -91,7 +115,7 @@ $('#login-form').live('submit', function (e) {
 	loginUser(username, password, function () {
 		testLogin(function (isAuthed, data) {
 			App.ApplicationController.loggedIn = isAuthed;
-			App.ApplicationController.user = User.create({username:data.response.username});
+			App.ApplicationController.user = App.User.create({username:data.response.username});
 			if (isAuthed) {
 				console.log(data);
 				// redirect to index
