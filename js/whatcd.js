@@ -68,7 +68,6 @@ function getInfo(callback) {
 		data:{
 			action:'index'
 		},
-		async:false,
 		success:function (data) {
 			if (typeof callback === 'function') {
 				callback(data);

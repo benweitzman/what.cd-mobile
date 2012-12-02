@@ -75,10 +75,10 @@ App.Router = Ember.Router.extend({
 							App.ApplicationController.info = App.Info.create({messages:data.response.notifications.messages, notifications:data.response.notifications.notifications, subscriptions:data.response.notifications.subscriptions});
 						});
 						getNews(function (data) {
-							data.response.announcements.forEach(function(item) {
+							data.response.announcements.reverse().forEach(function(item) {
 								App.NewsController.createPost(item);
 							});
-							data.response.blogPosts.forEach(function(item) {
+							data.response.blogPosts.reverse().forEach(function(item) {
 								App.BlogController.createPost(item);
 							});
 						});
