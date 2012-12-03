@@ -62,37 +62,53 @@ wcd.logout = function(authkey, callback) {
 		}
 	});
 }
-function getInfo(callback) {
+
+// api calls. call wcd.method(params, callback)
+// where method is the action=something
+// params is any other params to be passed
+// callback is the callback to run on success
+// you can also call apiRequest(method, params, callback)
+// to do the same thing
+
+wcd.apiRequest = function(method, params, callback) {
+	params = params || {};
+	params.action = method
 	$.ajax({
-		url:'../ajax.php',
-		type:'GET',
-		dataType:'json',
-		data:{
-			action:'index'
-		},
-		success:function (data) {
+		url: '../ajax.php',
+		type: 'GET',
+		dataType: 'json',
+		data: params,
+		async:false,
+		success: function (data) {
 			if (typeof callback === 'function') {
 				callback(data);
 			}
-		}
-	});
-}
-function getNews(callback) {
-	$.ajax({
-		url:'../ajax.php',
-		type:'GET',
-		dataType:'json',
-		data:{
-			action:'announcements'
 		},
-		success:function (data) {
-			if (typeof callback === 'function') {
-				callback(data);
-			}
-		}
 	});
 }
 
+apiMethods = [
+	'index',
+	'user',
+	'inbox',
+	'top10',
+	'usersearch',
+	'requests',
+	'browse',
+	'bookmarks',
+	'subscriptions',
+	'artist',
+	'torrentgroup',
+	'request',
+	'notifications',
+	'rippy',
+	'similar_artists',
+	'announcements',
+]
 
-
-
+apiMethods.forEach(function(method) {
+	console.log('generating method for ' + method);
+	wcd[method] = function(params, callback) {
+		wcd.apiRequest(method, params, callback);
+	};
+});

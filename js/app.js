@@ -71,10 +71,10 @@ App.Router = Ember.Router.extend({
 					if (isAuthed) {
 						App.ApplicationController.user = App.User.create({username:data.response.username});
 						App.ApplicationController.authkey = data.response.authkey;
-						getInfo(function (data) {
+						wcd.index({}, function (data) {
 							App.ApplicationController.info = App.Info.create({messages:data.response.notifications.messages, notifications:data.response.notifications.notifications, subscriptions:data.response.notifications.subscriptions});
 						});
-						getNews(function (data) {
+						wcd.announcements({}, function (data) {
 							data.response.announcements.reverse().forEach(function(item) {
 								App.NewsController.createPost(item);
 							});
