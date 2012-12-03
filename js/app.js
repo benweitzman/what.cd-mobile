@@ -29,6 +29,10 @@ App.NewsController = Ember.ArrayController.create({
 		var post = App.NewsPost.create({ title: newsItem.title, body: newsItem.body });
 		this.pushObject(post);
 	},
+
+	clearPosts: function() {
+		this.set('content', []);
+	},
 });
 
 App.BlogPost = Ember.Object.extend({
@@ -42,6 +46,10 @@ App.BlogController = Ember.ArrayController.create({
 	createPost: function(blogItem) {
 		var post = App.NewsPost.create({ title: blogItem.title, body: blogItem.body });
 		this.pushObject(post);
+	},
+
+	clearPosts: function() {
+		this.set('content', []);
 	},
 });
 
@@ -75,9 +83,11 @@ App.Router = Ember.Router.extend({
 							App.ApplicationController.info = App.Info.create({messages:data.response.notifications.messages, notifications:data.response.notifications.notifications, subscriptions:data.response.notifications.subscriptions});
 						});
 						wcd.announcements({}, function (data) {
+							App.NewsController.clearPosts();
 							data.response.announcements.reverse().forEach(function(item) {
 								App.NewsController.createPost(item);
 							});
+							App.BlogController.clearPosts();
 							data.response.blogPosts.reverse().forEach(function(item) {
 								App.BlogController.createPost(item);
 							});
