@@ -1,4 +1,6 @@
-function loginUser(username, password, success, error) {
+var wcd = wcd || {};
+
+wcd.loginUser = function(username, password, success, error) {
 	// success(); return false; // debug without live gazelle
 
 	$.ajax({
@@ -22,7 +24,7 @@ function loginUser(username, password, success, error) {
 	return false;
 }
 
-function testLogin(callback) {
+wcd.testLogin = function(callback) {
 	// callback is called with true for logged in
 	// or false for not
 	$.ajax({
@@ -48,7 +50,7 @@ function testLogin(callback) {
 	});
 }
 
-function logout(authkey, callback) {
+wcd.logout = function(authkey, callback) {
 	$.ajax({
 		url:'../logout.php',
 		method:'GET',
@@ -90,3 +92,7 @@ function getNews(callback) {
 		}
 	});
 }
+
+
+
+

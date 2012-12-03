@@ -66,7 +66,7 @@ App.Router = Ember.Router.extend({
 		index:Ember.Route.extend({
 			route:'/',
 			connectOutlets:function (router) {
-				testLogin(function (isAuthed, data) {
+				wcd.testLogin(function (isAuthed, data) {
 					App.ApplicationController.loggedIn = isAuthed;
 					if (isAuthed) {
 						App.ApplicationController.user = App.User.create({username:data.response.username});
@@ -98,7 +98,7 @@ App.Router = Ember.Router.extend({
 		logoout:Ember.Route.extend({
 			route:'/logout',
 			connectOutlets:function (router) {
-				logout(App.ApplicationController.authkey, function () {
+				wcd.logout(App.ApplicationController.authkey, function () {
 					router.transitionTo('root.index');
 				});
 			}
@@ -112,8 +112,8 @@ $('#login-form').live('submit', function (e) {
 	var username = $('#login-username').val();
 	var password = $('#login-password').val();
 	console.log("abc");
-	loginUser(username, password, function () {
-		testLogin(function (isAuthed, data) {
+	wcd.loginUser(username, password, function () {
+		wcd.testLogin(function (isAuthed, data) {
 			App.ApplicationController.loggedIn = isAuthed;
 			App.ApplicationController.user = App.User.create({username:data.response.username});
 			if (isAuthed) {
