@@ -121,14 +121,11 @@ App.initialize();
 $('#login-form').live('submit', function (e) {
 	var username = $('#login-username').val();
 	var password = $('#login-password').val();
-	console.log("abc");
 	wcd.loginUser(username, password, function () {
 		wcd.testLogin(function (isAuthed, data) {
 			App.ApplicationController.loggedIn = isAuthed;
 			App.ApplicationController.user = App.User.create({username:data.response.username});
 			if (isAuthed) {
-				console.log(data);
-				// redirect to index
 				App.get('router').transitionTo('root.index');
 			} else {
 				// do something to show invalid login and maybe number of attempts left

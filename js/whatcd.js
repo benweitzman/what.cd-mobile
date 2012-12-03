@@ -35,14 +35,11 @@ wcd.testLogin = function(callback) {
 			action:'index',
 		},
 		success:function (data) {
-			console.log(data);
-			console.log('logged in');
 			if (typeof callback === 'function') {
 				callback(true, data);
 			}
 		},
 		error:function (xhr, status) {
-			console.log('not logged in');
 			if (typeof callback === 'function') {
 				callback(false);
 			}
@@ -107,7 +104,6 @@ apiMethods = [
 ]
 
 apiMethods.forEach(function(method) {
-	console.log('generating method for ' + method);
 	wcd[method] = function(params, callback) {
 		wcd.apiRequest(method, params, callback);
 	};
