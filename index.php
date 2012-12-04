@@ -88,9 +88,7 @@
 <script type="text/x-handlebars" data-template-name="index">
 	{{#if App.ApplicationController.loggedIn}}
 		{{view App.NavbarView}}
-		{{#if App.ApplicationController.info.messages}}
-			{{view App.AlertsView}}
-		{{/if}}
+    	{{view App.AlertsView}}
 		<h3>Announcements</h3>
 		{{#collection contentBinding="App.NewsController" tagName="ul" class="news"}}
 			<li class="news-item">
@@ -122,15 +120,12 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="alerts">
-	<div class="alert alert-success">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		{{#if App.ApplicationController.info.messages}}
-			<strong>{{App.ApplicationController.info.messages}}</strong> new message.
-		{{/if}}
-		{{#if App.ApplicationController.info.notifications}}
-			<strong>{{App.ApplicationController.info.notifications}}</strong> notification.
-		{{/if}}
-	</div>
+    {{#collection contentBinding="App.AlertsController" class="alerts"}}
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{{view.content.title}}}</strong>
+    </div>
+    {{/collection}}
 </script>
 
 <!-- The missing protocol means that it will match the current protocol, either http or https. If running locally, we use the local jQuery. -->

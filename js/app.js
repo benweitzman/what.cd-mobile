@@ -35,6 +35,23 @@ App.NewsController = Ember.ArrayController.create({
 	},
 });
 
+App.Alert = Ember.Object.extend({
+	title: null
+});
+
+App.AlertsController = Ember.ArrayController.create({
+	content: [],
+
+	createAlert: function(title) {
+		var alert = App.Alert.create({ title: title});
+		this.pushObject(alert);
+	},
+
+	clearAlerts: function() {
+		this.set('content', []);
+	}
+});
+
 App.BlogPost = Ember.Object.extend({
 	title: null,
 	body: null
@@ -66,7 +83,7 @@ App.LoginFormView = Ember.View.extend({
 	templateName:'login-form'
 });
 App.AlertsView = Ember.View.extend({
-	templateName:'alerts',
+	templateName:'alerts'
 });
 
 App.Router = Ember.Router.extend({
@@ -80,7 +97,16 @@ App.Router = Ember.Router.extend({
 						App.ApplicationController.user = App.User.create({username:data.response.username});
 						App.ApplicationController.authkey = data.response.authkey;
 						wcd.index({}, function (data) {
-							App.ApplicationController.info = App.Info.create({messages:data.response.notifications.messages, notifications:data.response.notifications.notifications, subscriptions:data.response.notifications.subscriptions});
+							//TODO add links to relavent pages
+							App.AlertsController.clearAlerts();
+							if(data.response.notifications.messages > 0) {
+								var word = data.response.notifications.messages > 1 ? "messages" : "message";
+								App.AlertsController.createAlert("<a href=''>" + data.response.notifications.messages + " new " + word + "</a>");
+							}
+							if(data.response.notifications.notifications > 0) {
+								var word = data.response.notifications.notifications > 1 ? "notifications" : "notification";
+								App.AlertsController.createAlert("<a href=''>" + data.response.notifications.notifications + " new " + word + "</a>");
+							}
 						});
 						wcd.announcements({}, function (data) {
 							App.NewsController.clearPosts();
