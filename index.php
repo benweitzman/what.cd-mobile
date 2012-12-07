@@ -60,14 +60,16 @@
 
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="">Home</a></li>
+                        {{#view view.NavItemView item="index" }}
+                        <a href="#" >Home</a>
+                        {{/view}}
 						<li><a href="">Torrents</a></li>
-						<li><a href="">Forums</a></li>
-						{{#if App.ApplicationController.info.subscriptions}}
-							<li><a href=""><strong>Subscriptions</strong></a></li>
-						{{else}}
-							<li><a href="">Subscriptions</a></li>
-						{{/if}}
+                        {{#view view.NavItemView item="forums" }}
+                        <a href="#/forums" >Forums</a>
+                        {{/view}}
+                        {{#view view.NavItemView item="subscriptions" }}
+                        <a href="#/subscriptions" >Subscriptions</a>
+                        {{/view}}
 						<li><a href="">Inbox</a></li>
 					</ul>
 					<ul class="nav pull-right">
@@ -107,6 +109,17 @@
 		<h1>What.CD</h1>
 		<a href="#/login">Log In</a>
 	{{/if}}
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="subscriptions">
+    {{view App.NavbarView}}
+    {{view App.AlertsView}}
+    <table class="table table-striped">
+    {{#collection contentBinding="App.SubscriptionsController" class="subscriptions"}}
+	<tr><td><strong><a href="#">{{view.content.thread.forumName}}</a></strong> > <a href="#">{{view.content.thread.threadTitle}}</a></td></tr>
+    {{/collection}}
+	</table>
 </script>
 
 <script type="text/x-handlebars" data-template-name="login-form">
