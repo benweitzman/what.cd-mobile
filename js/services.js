@@ -86,3 +86,20 @@ whatMobile.factory("User", function ($http, WhatAPI){
 
 	return user;
 });
+
+whatMobile.factory("NavBar", function (){
+	var navbar = {};
+	navbar.active = "";
+
+	navbar.getClass = function (name){
+		if (name === navbar.active)
+			return "active";
+		return "";
+	}
+
+	navbar.setActive = function (name){
+		navbar.active = name;
+	}
+
+	return navbar;
+});

@@ -16,5 +16,6 @@
 	<script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/services.js"></script>
+	<script type="text/javascript" src="js/directives.js"></script>
 </body>
 </html>

@@ -7,8 +7,9 @@ whatMobile.config(function($routeProvider, $locationProvider){
 		.otherwise({redirectTo: "/"});
 });
 
-whatMobile.controller("IndexCtrl", function ($scope, $http, $location, User, WhatAPI){
+whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, NavBar){
 	$scope.announcements = [];
+	NavBar.active = "index";
 
 	//Make sure logged in
 	if (!User.loggedIn){
@@ -31,9 +32,13 @@ whatMobile.controller("IndexCtrl", function ($scope, $http, $location, User, Wha
 			$scope.announcements = data.response.announcements;
 		});
 	}
+
+	//Forward set/get functions for NavBar service
+	$scope.getNavClass = NavBar.getClass;
+	$scope.setActive = NavBar.setActive;
 })
 
-whatMobile.controller("LoginCtrl", function ($scope, $http, $location, User){
+whatMobile.controller("LoginCtrl", function ($scope, $location, User){
 	$scope.login = function (username, password){
 		User.login(username, password, function(){
 			console.log('redirect to index!');
