@@ -8,6 +8,8 @@ whatMobile.config(function($routeProvider, $locationProvider){
 });
 
 whatMobile.controller("IndexCtrl", function ($scope, $http, $location, User, WhatAPI){
+	$scope.announcements = [];
+
 	//Make sure logged in
 	if (!User.loggedIn){
 		console.log("You aren't logged in!");
@@ -22,9 +24,11 @@ whatMobile.controller("IndexCtrl", function ($scope, $http, $location, User, Wha
 		});
 	};
 
+	//What to do about escaping html encoded characters? such as &#39; for ' 
 	$scope.showAnnouncements = function (){
 		WhatAPI.announcements({}, function (data){
 			console.log(data);
+			$scope.announcements = data.response.announcements;
 		});
 	}
 })
