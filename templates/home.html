@@ -1,10 +1,9 @@
 <navbar></navbar>
 
 <div>
-	<p>Welcome user: {{user.username}}</p>
-	<button class="btn btn-primary" ng-click="showAnnouncements()">Load announcements</button>
-	<li ng-repeat="announcement in announcements">
-		<p><h4>{{announcement.title}}</h4>{{announcement.newsTime}}</p>
-		<p>{{announcement.body}}</p>
+	<h3>Announcements</h3>
+	<li class="news-item" ng-repeat="announcement in announcements">
+		<h4>{{announcement.title}}</h4>
+		<div class="news-body">{{announcement.body}}</div>
 	</li>
 </div>

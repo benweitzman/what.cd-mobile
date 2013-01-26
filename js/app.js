@@ -20,21 +20,20 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 		console.log("You aren't logged in!");
 		$location.path("/");
 	}
-	
+
+	//Load up announcements
+	//What to do about escaping html encoded characters? such as &#39; for ' 
+	WhatAPI.announcements({}, function (data){
+		console.log(data);
+		$scope.announcements = data.response.announcements;
+	});
+
 	$scope.logout = function (){
 		User.logout(function (){
 			$location.path("/");
 			$scope.$apply();
 		});
-	};
-
-	//What to do about escaping html encoded characters? such as &#39; for ' 
-	$scope.showAnnouncements = function (){
-		WhatAPI.announcements({}, function (data){
-			console.log(data);
-			$scope.announcements = data.response.announcements;
-		});
-	}
+	};	
 })
 
 whatMobile.controller("LoginCtrl", function ($scope, $location, User){
