@@ -9,15 +9,18 @@ whatMobile.config(function($routeProvider, $locationProvider){
 
 whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, NavBar){
 	$scope.announcements = [];
+	$scope.user = User.response;
 	NavBar.active = "index";
+	//Forward set/get functions for NavBar service
+	$scope.getNavClass = NavBar.getClass;
+	$scope.setActive = NavBar.setActive;
 
-	//Make sure logged in
+	//Redirect to index if not logged in
 	if (!User.loggedIn){
 		console.log("You aren't logged in!");
 		$location.path("/");
 	}
-
-	$scope.user = User.response;
+	
 	$scope.logout = function (){
 		User.logout(function (){
 			$location.path("/");
@@ -32,10 +35,6 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 			$scope.announcements = data.response.announcements;
 		});
 	}
-
-	//Forward set/get functions for NavBar service
-	$scope.getNavClass = NavBar.getClass;
-	$scope.setActive = NavBar.setActive;
 })
 
 whatMobile.controller("LoginCtrl", function ($scope, $location, User){
@@ -53,10 +52,3 @@ whatMobile.controller("LoginCtrl", function ($scope, $location, User){
 	}
 })
 
-whatMobile.directive("navbar", function (){
-	return {
-		restrict: "E",
-		replace: true,
-		templateUrl: "templates/navbar.html"
-	};
-})
