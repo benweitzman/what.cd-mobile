@@ -10,10 +10,12 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li ng-class="getNavClass('index')"><a href="#/index">Home</a></li>
-					<li><a href="">Torrents</a></li>
-					<li><a href="">Forums</a></li>
-					<li><a href="">Subscriptions</a></li>
-					<li><a href="">Inbox</a></li>
+					<li ng-class="getNavClass('torrents')"><a href="#/torrents">Torrents</a></li>
+					<li ng-class="getNavClass('forums')"><a href="#/forums">Forums</a></li>
+					<li ng-class="getNavClass('subscriptions')">
+						<a href="#/subscriptions">Subscriptions</a>
+					</li>
+					<li ng-class="getNavClass('inbox')"><a href="#/inbox">Inbox</a></li>
 				</ul>
 				<ul class="nav pull-right">
 					<li id="fat-menu" class="dropdown">

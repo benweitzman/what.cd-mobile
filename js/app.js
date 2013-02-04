@@ -4,6 +4,7 @@ whatMobile.config(function($routeProvider, $locationProvider){
 	$routeProvider
 		.when("/", {templateUrl: "templates/login.html", controller: "LoginCtrl"})
 		.when("/index", {templateUrl: "templates/home.html", controller: "IndexCtrl"})
+		.when("/forums", {templateUrl: "templates/forums.html", controller: "ForumCtrl"})
 		.otherwise({redirectTo: "/"});
 });
 
@@ -20,13 +21,14 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 		console.log("You aren't logged in!");
 		$location.path("/");
 	}
-
-	//Load up announcements
-	//What to do about escaping html encoded characters? such as &#39; for ' 
-	WhatAPI.announcements({}, function (data){
-		console.log(data);
-		$scope.announcements = data.response.announcements;
-	});
+	else {
+		//Load up announcements
+		//What to do about escaping html encoded characters? such as &#39; for ' 
+		WhatAPI.announcements({}, function (data){
+			console.log(data);
+			$scope.announcements = data.response.announcements;
+		});
+	}
 
 	$scope.logout = function (){
 		User.logout(function (){
@@ -34,6 +36,17 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 			$scope.$apply();
 		});
 	};	
+})
+
+whatMobile.controller("ForumCtrl", function ($scope, $location, WhatAPI, NavBar){
+	NavBar.active = "forums";
+	//Forward set/get functions for NavBar service
+	$scope.getNavClass = NavBar.getClass;
+	$scope.setActive = NavBar.setActive;
+
+	WhatAPI.forum({type: "main"}, function (data){
+		console.log(data);
+	});
 })
 
 whatMobile.controller("LoginCtrl", function ($scope, $location, User){
@@ -50,4 +63,3 @@ whatMobile.controller("LoginCtrl", function ($scope, $location, User){
 		});
 	}
 })
-

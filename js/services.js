@@ -3,7 +3,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 	var methods = ["index", "user", "inbox", "top10", "usersearch",
 		"requests", "browse", "bookmarks", "subscriptions", "artist",
 		"torrentgroup", "request", "notifications", "rippy",
-		"similar_artists", "announcements"];
+		"similar_artists", "announcements", "forum"];
 
 	wcd.apiRequest = function (method, params, callback){
 		params = params || {};
