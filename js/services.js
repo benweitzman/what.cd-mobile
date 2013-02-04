@@ -18,8 +18,8 @@ whatMobile.factory("WhatAPI", function ($http) {
 				if (typeof callback === "function")
 					callback(data);
 			},
-			error: function (data){
-				console.log("Api request issue with method: " + method);
+			error: function (xhr, opt, thrown){
+				console.log("WhatAPI - " + method + " ERROR: " + xhr + " " + thrown);
 			}
 		});
 	}
