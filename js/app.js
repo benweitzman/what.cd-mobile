@@ -17,10 +17,9 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 	$scope.setActive = NavBar.setActive;
 
 	//Redirect to index if not logged in
-	if (!User.loggedIn){
-		console.log("You aren't logged in!");
+	if (!User.loggedIn)
 		$location.path("/");
-	}
+
 	else {
 		//Load up announcements
 		//What to do about escaping html encoded characters? such as &#39; for ' 

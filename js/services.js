@@ -12,12 +12,14 @@ whatMobile.factory("WhatAPI", function ($http) {
 		$.ajax({
 			url: "../ajax.php",
 			type: "GET",
-			dataType: "json",
 			data: params,
 			async: false,
 			success: function (data){
 				if (typeof callback === "function")
 					callback(data);
+			},
+			error: function (data){
+				console.log("Api request issue with method: " + method);
 			}
 		});
 	}
