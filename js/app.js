@@ -28,9 +28,7 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 	$scope.user = User.response;
 	
 	//Load up announcements
-	//What to do about escaping html encoded characters? such as &#39; for ' 
-	// WhatAPI.announcements({}, function (data){
-	WhatAPI.fakeApi("testJson/announcements.json", function (data){
+	WhatAPI.announcements({}, function (data){
 		console.log(data);
 		$scope.announcements = data.response.announcements;
 	});

@@ -10,8 +10,9 @@ way to do this? -->
 			<div class="forum" ng-repeat="f in cat.forums">
 				<!-- Will title with {{}} in it be ok? docs suggest its buggy for href so use
 				ng-href, but what about title? -->
-				<a ng-href="#/forums/{{f.forumId}}/1" title="{{f.forumDescription}}">{{f.forumName}}</a>
-				<a ng-href="#/thread/{{f.lastTopicId}}">{{f.lastTopic}}</a>
+				<a ng-href="#/forums/{{f.forumId}}/1" title="{{f.forumDescription}}" 
+					ng-bind-html="f.forumName" />
+				<a ng-href="#/thread/{{f.lastTopicId}}" ng-bind-html="f.lastTopic" />
 			</div>
 		</div>
 	</div>
