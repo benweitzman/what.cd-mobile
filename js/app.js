@@ -6,7 +6,7 @@ whatMobile.config(function($routeProvider, $locationProvider){
 		.when("/index", {templateUrl: "templates/home.html", controller: "IndexCtrl"})
 		.when("/forums", {templateUrl: "templates/forumindex.html", controller: "ForumIndexCtrl"})
 		.when("/forums/:forumid/:page", {templateUrl: "templates/forum.html", controller: "ForumCtrl"})
-		.otherwise({redirectTo: "/"});
+		.otherwise({redirectTo: "/404", templateUrl: "templates/404.html"});
 });
 
 //This controller manages the index view, ie. the homepage. Shows announcements, notifications
@@ -75,6 +75,7 @@ whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, Us
 
 	WhatAPI.forum({type: "viewforum", forumid: $routeParams.forumid, page: $routeParams.page},
 		function (data){
+			console.log(data);
 			$scope.forum = data.response;
 		}
 	)
