@@ -29,11 +29,14 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 	
 	//Load up announcements
 	//What to do about escaping html encoded characters? such as &#39; for ' 
-	WhatAPI.announcements({}, function (data){
+	// WhatAPI.announcements({}, function (data){
+	WhatAPI.fakeApi("testJson/announcements.json", function (data){
 		console.log(data);
 		$scope.announcements = data.response.announcements;
-		//should be a loop through all bodies and titles
-		$scope.announcements[0].body = WhatAPI.deEncode($scope.announcements[0].body);
+		$scope.announcements.forEach(function (announce){
+			announce.title = WhatAPI.deEncode(announce.title);
+			announce.body = WhatAPI.deEncode(announce.body);
+		});
 	});
 
 	$scope.logout = function (){

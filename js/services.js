@@ -48,7 +48,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 		return target;
 	}
 
-	methods.forEach(function(method){
+	methods.forEach(function (method){
 		wcd[method] = function (params, callback){
 			wcd.apiRequest(method, params, callback);
 		}
