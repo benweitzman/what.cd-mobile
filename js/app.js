@@ -32,6 +32,8 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 	WhatAPI.announcements({}, function (data){
 		console.log(data);
 		$scope.announcements = data.response.announcements;
+		//should be a loop through all bodies and titles
+		$scope.announcements[0].body = WhatAPI.deEncode($scope.announcements[0].body);
 	});
 
 	$scope.logout = function (){
