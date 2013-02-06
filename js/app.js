@@ -55,14 +55,10 @@ whatMobile.controller("ForumIndexCtrl", function ($scope, $location, User, WhatA
 	$scope.setActive = NavBar.setActive;
 	$scope.categories = [];
 
-	// WhatAPI.forum({type: "main"}, function (data){
-	// 	console.log(data);
-	// 	$scope.categories = data.response.categories;
-	// });
-	WhatAPI.fakeApi("testJson/forumIdx.json", function (data){
+	WhatAPI.forum({type: "main"}, function (data){
 		console.log(data);
 		$scope.categories = data.response.categories;
-	})
+	});
 })
 
 //Manages viewing a specific forum
