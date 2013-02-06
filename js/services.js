@@ -42,12 +42,6 @@ whatMobile.factory("WhatAPI", function ($http) {
 		});
 	}
 
-	//Convert from html encoding to unicode
-	wcd.deEncode = function (target){
-		target = $("<div/>").html(target).text();
-		return target;
-	}
-
 	methods.forEach(function (method){
 		wcd[method] = function (params, callback){
 			wcd.apiRequest(method, params, callback);

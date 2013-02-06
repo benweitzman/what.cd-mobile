@@ -12,6 +12,7 @@
 
 	<script type="text/javascript" src="js/libs/jquery.min.js"></script>
 	<script type="text/javascript" src="js/libs/angular.min.js"></script>
+	<script type="text/javascript" src="js/libs/angular-sanitize.min.js"></script>
 	<script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/services.js"></script>

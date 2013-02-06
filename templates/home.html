@@ -6,6 +6,6 @@ way to do this? -->
 	<h3>Announcements</h3>
 	<li class="news-item" ng-repeat="announcement in announcements">
 		<h4>{{announcement.title}}</h4>
-		<div class="news-body">{{announcement.body}}</div>
+		<div class="news-body" ng-bind-html="announcement.body" />
 	</li>
 </div>

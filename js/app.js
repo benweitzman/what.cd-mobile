@@ -1,4 +1,4 @@
-var whatMobile = angular.module("what-mobile", []);
+var whatMobile = angular.module("what-mobile", ["ngSanitize"]);
 
 whatMobile.config(function($routeProvider, $locationProvider){
 	$routeProvider
@@ -33,10 +33,6 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 	WhatAPI.fakeApi("testJson/announcements.json", function (data){
 		console.log(data);
 		$scope.announcements = data.response.announcements;
-		$scope.announcements.forEach(function (announce){
-			announce.title = WhatAPI.deEncode(announce.title);
-			announce.body = WhatAPI.deEncode(announce.body);
-		});
 	});
 
 	$scope.logout = function (){
