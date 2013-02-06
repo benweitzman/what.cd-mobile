@@ -5,6 +5,8 @@ whatMobile.factory("WhatAPI", function ($http) {
 		"torrentgroup", "request", "notifications", "rippy",
 		"similar_artists", "announcements", "forum"];
 
+	//Perform an API request with action=method, optional parameters
+	//and on success pass the data to callback function
 	wcd.apiRequest = function (method, params, callback){
 		params = params || {};
 		params.action = method;
@@ -13,6 +15,22 @@ whatMobile.factory("WhatAPI", function ($http) {
 			url: "../ajax.php",
 			type: "GET",
 			data: params,
+			async: false,
+			success: function (data){
+				if (typeof callback === "function")
+					callback(data);
+			},
+			error: function (xhr, opt, thrown){
+				console.log("WhatAPI - " + method + " ERROR: " + xhr + " " + thrown);
+			}
+		});
+	}
+
+	//Peform a fake api request, getting the data instead from a json file
+	wcd.fakeApi = function (file, callback){
+		$.ajax({
+			url: file,
+			type: "GET",
 			async: false,
 			success: function (data){
 				if (typeof callback === "function")
