@@ -1,0 +1,18 @@
+<navbar></navbar>
+<!-- For some spacing beneath the navbar, but shouldn't there be a better
+way to do this? -->
+<br /> <br />
+<!-- I'm not really so good at markup, what should this be classed/id'd as? -->
+<div class="container">
+	<div id="forum-index">
+		<div class="forum-category" ng-repeat="cat in categories">
+			<h3>{{cat.categoryName}}</h3>
+			<div class="forum" ng-repeat="f in cat.forums">
+				<!-- Will title with {{}} in it be ok? docs suggest its buggy for href so use
+				ng-href, but what about title? -->
+				<a ng-href="#/forums/{{f.forumId}}/1" title="{{f.forumDescription}}">{{f.forumName}}</a>
+				<a ng-href="#/thread/{{f.lastTopicId}}">{{f.lastTopic}}</a>
+			</div>
+		</div>
+	</div>
+</div>

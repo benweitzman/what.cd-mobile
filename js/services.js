@@ -33,7 +33,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 	return wcd;
 });
 
-whatMobile.factory("User", function ($http, WhatAPI){
+whatMobile.factory("User", function ($http, $location, WhatAPI){
 	var user = {};
 	user.loggedIn = false;
 	user.response = null;
