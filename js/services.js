@@ -74,7 +74,6 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 	user.loggedIn = false;
 	user.response = null;
 
-	//Login the user
 	user.login = function (uname, pwd, succ, err){
 		$.ajax({
 			url: "../login.php",
@@ -105,7 +104,6 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 		});
 	}
 
-	//Logout the user
 	user.logout = function (succ){
 		$.ajax({
 			url: "../logout.php",
@@ -125,7 +123,6 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 		return user.response;
 	}
 
-	//Calculate user's buffer
 	user.buffer = function (){
 		return (user.response.userstats.uploaded - user.response.userstats.downloaded);
 	}

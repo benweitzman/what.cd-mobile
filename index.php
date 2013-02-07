@@ -22,10 +22,14 @@
 						<li ng-class="getNavClass('index')"><a href="#/index">Home</a></li>
 						<li ng-class="getNavClass('torrents')"><a href="#/torrents">Torrents</a></li>
 						<li ng-class="getNavClass('forums')" ><a href="#/forums">Forums</a></li>
-						<li ng-class="getNavClass('subscriptions')">
-							<a href="#/subscriptions">Subscriptions</a>
+						<li ng-class="getNavClass('subscriptions')"><a href="#/subscriptions">Subscriptions</a>
 						</li>
-						<li ng-class="getNavClass('inbox')"><a href="#/inbox">Inbox</a></li>
+						<li ng-class="getNavClass('inbox')"><a href="#/inbox">Inbox
+						<span class="badge badge-info" ng-show="user().notifications.messages > 0">
+								{{user().notifications.messages}}
+						</span>
+						</a>
+						</li>
 					</ul>
 					<ul class="nav pull-right">
 						<li id="fat-menu" class="dropdown">
