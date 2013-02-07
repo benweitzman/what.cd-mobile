@@ -70,6 +70,8 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 				//saying why it failed (bad username/pass/etc)
 				WhatAPI.index({}, function (idx){
 					if (idx.response === undefined){
+						console.log("login failed, resp: ");
+						console.log(idx.response);
 						if (typeof err === "function")
 							err();
 						return;
