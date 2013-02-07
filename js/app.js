@@ -6,6 +6,7 @@ whatMobile.config(function($routeProvider, $locationProvider){
 		.when("/index", {templateUrl: "templates/home.html", controller: "IndexCtrl"})
 		.when("/forums", {templateUrl: "templates/forumindex.html", controller: "ForumIndexCtrl"})
 		.when("/forums/:forumid/:page", {templateUrl: "templates/forum.html", controller: "ForumCtrl"})
+		.when("/thread/:threadid", {templateUrl: "templates/thread.html", controller: "ThreadCtrl"})
 		.otherwise({redirectTo: "/404", templateUrl: "templates/404.html"});
 });
 
@@ -26,7 +27,7 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 
 	$scope.announcements = [];
 	$scope.user = User.response;
-	
+
 	//Load up announcements
 	WhatAPI.announcements({}, function (data){
 		console.log(data);
@@ -78,6 +79,38 @@ whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, Us
 			$scope.forum = data.response;
 		}
 	)
+})
+
+//Manages viewing a thread
+whatMobile.controller("ThreadCtrl", function ($scope, $location, $routeParams, User, WhatAPI, NavBar){
+	//Redirect to index if not logged in 
+	if (!User.loggedIn)
+		$location.path("/");
+
+	NavBar.active = "forums";
+	//Forward set/get functions for NavBar service
+	$scope.getNavClass = NavBar.getClass;
+	$scope.setActive = NavBar.setActive;
+	$scope.thread = {};
+
+	WhatAPI.forum({type: "viewthread", threadid: $routeParams.threadid}, function (data){
+		console.log(data);
+		$scope.thread = data.response;
+	})
+})
+
+whatMobile.controller("NavCtrl", function ($scope, $location, NavBar, User){
+	$scope.getNavClass = NavBar.getClass;
+	$scope.setActive = NavBar.setActive;
+	$scope.nav = NavBar;
+	$scope.user = User.info;
+
+	$scope.logout = function (){
+		User.logout(function (){
+			$location.path("/");
+			$scope.$apply();
+		});
+	};
 })
 
 //Manages logging in to the site

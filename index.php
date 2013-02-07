@@ -8,6 +8,43 @@
 </head>
 
 <body ng-app="what-mobile">
+	<div class="navbar navbar-fixed-top" ng-controller="NavCtrl" ng-show="nav.showing()">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="#/index">What.CD</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li ng-class="getNavClass('index')"><a href="#/index">Home</a></li>
+						<li ng-class="getNavClass('torrents')"><a href="#/torrents">Torrents</a></li>
+						<li ng-class="getNavClass('forums')" ><a href="#/forums">Forums</a></li>
+						<li ng-class="getNavClass('subscriptions')">
+							<a href="#/subscriptions">Subscriptions</a>
+						</li>
+						<li ng-class="getNavClass('inbox')"><a href="#/inbox">Inbox</a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li id="fat-menu" class="dropdown">
+							<a href="" id="user_menu" role="button" class="dropdown-toggle" 
+								data-toggle="dropdown">
+								<!-- It seems we have to use a function or this won't be updated
+								properly after logging in. Maybe I'm just doing something wrong? -->
+								{{user().username}}
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a ng-click="logout()">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	
 	<div ng-view></div>
 
 	<script type="text/javascript" src="js/libs/jquery.min.js"></script>

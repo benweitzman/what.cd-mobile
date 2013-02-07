@@ -21,7 +21,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 					callback(data);
 			},
 			error: function (xhr, opt, thrown){
-				console.log("WhatAPI - " + method + " ERROR: " + xhr + " " + thrown);
+				console.log("WhatAPI - " + method + " ERROR: " + xhr.status + " " + thrown);
 			}
 		});
 	}
@@ -104,10 +104,19 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 		});
 	}
 
+	user.info = function (){
+		return user.response;
+	}
+
+	//Calculate user's buffer
+	user.buffer = function (){
+		return (user.response.userstats.uploaded - user.response.userstats.downloaded);
+	}
+
 	return user;
 });
 
-whatMobile.factory("NavBar", function (){
+whatMobile.factory("NavBar", function (User){
 	var navbar = {};
 	navbar.active = "";
 
@@ -119,6 +128,10 @@ whatMobile.factory("NavBar", function (){
 
 	navbar.setActive = function (name){
 		navbar.active = name;
+	}
+
+	navbar.showing = function (){
+		return User.loggedIn;
 	}
 
 	return navbar;
