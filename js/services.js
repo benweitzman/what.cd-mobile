@@ -72,7 +72,6 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 					if (idx.response === undefined){
 						if (typeof err === "function")
 							err();
-						user.loggedIn = false;
 						return;
 					}
 					user.response = idx.response;

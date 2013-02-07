@@ -14,10 +14,10 @@ whatMobile.config(function($routeProvider, $locationProvider){
 //blog, etc
 whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, NavBar){
 	//Redirect to index if not logged in 
-	//This redirect doesn't seem to happen instantly, if you go directly to index
-	//without logging in the index will still get logged
-	if (!User.loggedIn)
+	if (!User.loggedIn){
 		$location.path("/");
+		return;
+	}
 
 	//Setup navbar
 	NavBar.active = "index";
@@ -45,8 +45,10 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 //This controller manages the forum index view
 whatMobile.controller("ForumIndexCtrl", function ($scope, $location, User, WhatAPI, NavBar){
 	//Redirect to index if not logged in 
-	if (!User.loggedIn)
+	if (!User.loggedIn){
 		$location.path("/");
+		return;
+	}
 
 	//Setup navbar
 	NavBar.active = "forums";
@@ -64,8 +66,10 @@ whatMobile.controller("ForumIndexCtrl", function ($scope, $location, User, WhatA
 //Manages viewing a specific forum
 whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, User, WhatAPI, NavBar){
 	//Redirect to index if not logged in 
-	if (!User.loggedIn)
+	if (!User.loggedIn){
 		$location.path("/");
+		return;
+	}
 
 	NavBar.active = "forums";
 	//Forward set/get functions for NavBar service
@@ -84,8 +88,10 @@ whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, Us
 //Manages viewing a thread
 whatMobile.controller("ThreadCtrl", function ($scope, $location, $routeParams, User, WhatAPI, NavBar){
 	//Redirect to index if not logged in 
-	if (!User.loggedIn)
+	if (!User.loggedIn){
 		$location.path("/");
+		return;
+	}
 
 	NavBar.active = "forums";
 	//Forward set/get functions for NavBar service
