@@ -10,7 +10,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 	wcd.get = function (method, params, callback, err){
 		params = params || {};
 		params.action = method;
-		
+
 		$.ajax({
 			url: "../ajax.php",
 			type: "GET",
@@ -31,6 +31,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 	//Perform an API post request
 	wcd.post = function (method, params, callback, err){
 		params = params || {};
+		
 		$.ajax({
 			url: "../" + method + ".php",
 			type: "POST",

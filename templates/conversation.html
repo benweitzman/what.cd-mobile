@@ -1,0 +1,12 @@
+<div class="container">
+	<h4>{{conv.subject}}</h4>
+	<div class="message" ng-repeat="m in conv.messages">
+		From: {{m.senderName}}
+		<div ng-bind-html="m.body" />
+	</div>
+	<form id="conv-reply">
+		<textarea required type="text" ng-model="body" placeholder="Body"/><br />
+		<button class="btn btn-large btn-primary" type="submit" ng-click="reply(body)">
+			Reply</button>
+	</form>
+</div>

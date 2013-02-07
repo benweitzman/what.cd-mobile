@@ -16,7 +16,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="#/index">What.CD</a>
+				<a class="brand" href="#/index" ng-click="nav.setActive('index')">What.CD</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li ng-class="nav.getClass('index')"><a href="#/index" ng-click="nav.setActive('index')">

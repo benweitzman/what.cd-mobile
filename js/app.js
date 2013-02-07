@@ -8,6 +8,7 @@ whatMobile.config(function($routeProvider, $locationProvider){
 		.when("/forums/:forumid/:page", {templateUrl: "templates/forum.html", controller: "ForumCtrl"})
 		.when("/thread/:threadid", {templateUrl: "templates/thread.html", controller: "ThreadCtrl"})
 		.when("/inbox", {templateUrl: "templates/inbox.html", controller: "InboxCtrl"})
+		.when("/inbox/:convid", {templateUrl: "templates/conversation.html", controller: "ConvCtrl"})
 		.otherwise({redirectTo: "/404", templateUrl: "templates/404.html"});
 });
 
@@ -111,26 +112,56 @@ whatMobile.controller("InboxCtrl", function ($scope, $location, User, WhatAPI){
 
 	//Forward set/get functions for NavBar service
 	$scope.inbox = {};
+	//Mark new messages as viewed
+	User.response.notifications.messages = 0;
 
 	WhatAPI.inbox({}, function (data){
 		console.log(data);
 		$scope.inbox = data.response;
 	})
+})
 
-	//I'm not sure if this actually works? It should also be on a user's page
-	//but I'm not sure how to add users to my test gazelle since i don't have any email
-	//sending abilities from my server
-	$scope.sendPM = function (subject, body, userid){
+whatMobile.controller("ConvCtrl", function ($scope, $location, $routeParams, User, WhatAPI){
+	//Redirect to index if not logged in 
+	if (!User.loggedIn){
+		$location.path("/");
+		return;
+	}
+
+	$scope.conv = {};
+
+	//Get the conversation
+	getConv = function (){
+		WhatAPI.inbox({type: "viewconv", id: $routeParams.convid}, function (data){
+			console.log(data);
+			$scope.conv = data.response;
+		})
+		$scope.$apply();
+	}
+	getConv();
+
+	$scope.reply = function (body){
 		WhatAPI.post("inbox", {
-			action: "takecompose", 
-			toid: userid,
+			action: "takecompose",
+			toid: otherUserId(),
+			convid: $scope.conv.convId,
 			auth: User.response.authkey,
-			subject: subject,
 			body: body
-		}, 
+		},
 		function (data){
-			console.log("message sent?");
-		});
+			//Re-load view?
+			getConv();
+		})
+	}
+
+	//Resolve the user id of the other person
+	//Is there a better way to do this than just running through til we find the
+	//other person's user id?
+	otherUserId = function (){
+		for (var i = 0; i < $scope.conv.messages.length; ++i){
+			if ($scope.conv.messages[i].senderId != User.response.id)
+				return $scope.conv.messages[i].senderId;
+		}
 	}
 })
 
