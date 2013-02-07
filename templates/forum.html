@@ -3,4 +3,11 @@
 	<div class="thread" ng-repeat="t in forum.threads">
 		<a ng-href="#/thread/{{t.topicId}}">{{t.title}} (goes nowhere atm)</a>
 	</div>
+	<form>
+		<!-- Debug testing of thread creation -->
+		<input type="text", ng-model="subject" placeholder="Subject"><br />
+		<input type="text" ng-model="body" placeholder="Body" /><br />
+		<button class="btn btn-large btn-primary" type="submit" ng-click="createThread(subject, body)">
+			Post</button>
+	</form>
 </div>

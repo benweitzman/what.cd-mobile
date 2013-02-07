@@ -83,6 +83,20 @@ whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, Us
 			$scope.forum = data.response;
 		}
 	)
+
+	//Testing post api
+	$scope.createThread = function (title, body){
+		WhatAPI.apiPost("forums.php", {
+			action: "new",
+			auth: User.response.authkey,
+			forum: $routeParams.forumid,
+			title: title,
+			body: body
+		},
+		function (data){
+			console.log(data);
+		});
+	}
 })
 
 //Manages viewing a thread
@@ -128,17 +142,16 @@ whatMobile.controller("InboxCtrl", function ($scope, $location, User, WhatAPI, N
 	//but I'm not sure how to add users to my test gazelle since i don't have any email
 	//sending abilities from my server
 	$scope.sendPM = function (subject, body){
-		WhatAPI.apiPost("inbox.php", 
-			{
-				action: "takecompose", 
-				toid: User.response.id,
-				auth: User.response.authkey,
-				subject: subject,
-				body: body
-			},
-			function (data){
-				console.log("message sent?");
-			})
+		WhatAPI.apiPost("inbox.php", {
+			action: "takecompose", 
+			toid: User.response.id,
+			auth: User.response.authkey,
+			subject: subject,
+			body: body
+		}, 
+		function (data){
+			console.log("message sent?");
+		});
 	}
 })
 
