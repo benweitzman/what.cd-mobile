@@ -27,8 +27,21 @@ whatMobile.factory("WhatAPI", function ($http) {
 	}
 
 	//Perform an API post request
-	wcd.apiPost = function (method, params, callback){
-		
+	wcd.apiPost = function (path, params, callback){
+		params = params || {};
+
+		$.ajax({
+			url: "../" + path,
+			type: "POST",
+			data: params,
+			success: function (data){
+				if (typeof callback === "function")
+					callback(data);
+			},
+			error: function (xhr, opt, thrown){
+				console.log("WhatAPI post to - " + path + " ERROR: " + xhr.status + " " + thrown);
+			}
+		});
 	}
 
 	//Peform a fake api request, getting the data instead from a json file

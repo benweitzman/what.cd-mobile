@@ -2,4 +2,11 @@
 	<div class="message" ng-repeat="m in inbox.messages">
 		<a ng-href="#/inbox/{{m.convId}}">{{m.subject}}</a>
 	</div>
+	<form>
+		<!-- This is only here for debugging, but am i able to send myself a pm? -->
+		<input type="text", ng-model="subject" placeholder="Subject"><br />
+		<input type="text" ng-model="body" placeholder="Body" /><br />
+		<button class="btn btn-large btn-primary" type="submit" ng-click="sendPM(subject, body)">
+			Send</button>
+	</form>
 </div>

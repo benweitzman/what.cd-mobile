@@ -25,7 +25,6 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 	//Forward set/get functions for NavBar service
 	$scope.getNavClass = NavBar.getClass;
 	$scope.setActive = NavBar.setActive;
-
 	$scope.announcements = [];
 	$scope.user = User.response;
 
@@ -124,6 +123,23 @@ whatMobile.controller("InboxCtrl", function ($scope, $location, User, WhatAPI, N
 		console.log(data);
 		$scope.inbox = data.response;
 	})
+
+	//I'm not sure if this actually works? It should also be on a user's page
+	//but I'm not sure how to add users to my test gazelle since i don't have any email
+	//sending abilities from my server
+	$scope.sendPM = function (subject, body){
+		WhatAPI.apiPost("inbox.php", 
+			{
+				action: "takecompose", 
+				toid: User.response.id,
+				auth: User.response.authkey,
+				subject: subject,
+				body: body
+			},
+			function (data){
+				console.log("message sent?");
+			})
+	}
 })
 
 //Controls the navbar
