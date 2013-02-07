@@ -86,7 +86,7 @@ whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, Us
 
 	//Testing post api
 	$scope.createThread = function (title, body){
-		WhatAPI.apiPost("forums.php", {
+		WhatAPI.post("forums", {
 			action: "new",
 			auth: User.response.authkey,
 			forum: $routeParams.forumid,
@@ -142,7 +142,7 @@ whatMobile.controller("InboxCtrl", function ($scope, $location, User, WhatAPI, N
 	//but I'm not sure how to add users to my test gazelle since i don't have any email
 	//sending abilities from my server
 	$scope.sendPM = function (subject, body, userid){
-		WhatAPI.apiPost("inbox.php", {
+		WhatAPI.post("inbox", {
 			action: "takecompose", 
 			toid: userid,
 			auth: User.response.authkey,

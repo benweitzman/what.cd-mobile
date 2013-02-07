@@ -7,7 +7,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 
 	//Perform an API request with action=method, optional parameters
 	//and on success pass the data to callback function
-	wcd.apiGet = function (method, params, callback){
+	wcd.get = function (method, params, callback, err){
 		params = params || {};
 		params.action = method;
 		
@@ -22,16 +22,17 @@ whatMobile.factory("WhatAPI", function ($http) {
 			},
 			error: function (xhr, opt, thrown){
 				console.log("WhatAPI - " + method + " ERROR: " + xhr.status + " " + thrown);
+				if (typeof err === "function")
+					err();
 			}
 		});
 	}
 
 	//Perform an API post request
-	wcd.apiPost = function (path, params, callback){
+	wcd.post = function (method, params, callback, err){
 		params = params || {};
-
 		$.ajax({
-			url: "../" + path,
+			url: "../" + method + ".php",
 			type: "POST",
 			data: params,
 			success: function (data){
@@ -39,7 +40,9 @@ whatMobile.factory("WhatAPI", function ($http) {
 					callback(data);
 			},
 			error: function (xhr, opt, thrown){
-				console.log("WhatAPI post to - " + path + " ERROR: " + xhr.status + " " + thrown);
+				console.log("WhatAPI post to - " + method + " ERROR: " + xhr.status + " " + thrown);
+				if (typeof err === "function")
+					err();
 			}
 		});
 	}
@@ -62,7 +65,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 
 	methods.forEach(function (method){
 		wcd[method] = function (params, callback){
-			wcd.apiGet(method, params, callback);
+			wcd.get(method, params, callback);
 		}
 	});
 
@@ -75,33 +78,24 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 	user.response = null;
 
 	user.login = function (uname, pwd, succ, err){
-		$.ajax({
-			url: "../login.php",
-			type: "POST",
-			data: {
-				username: uname,
-				password: pwd
-			},
-			success: function (data){
-				//It'd be nice if login status failure also included a field
-				//saying why it failed (bad username/pass/etc)
-				WhatAPI.index({}, function (idx){
-					if (idx.response === undefined){
+		WhatAPI.post("login", {username: uname, password: pwd},
+			function (data){
+				WhatAPI.index({}, function (data){
+					if (data.response === undefined){
 						if (typeof err === "function")
 							err();
 						return;
 					}
-					user.response = idx.response;
+					user.response = data.response;
 					user.loggedIn = true;
 				});
 				if (typeof succ === "function")
 					succ();
 			},
-			error: function (data){
+			function (){
 				if (typeof err === "function")
 					err();
-			}
-		});
+			});
 	}
 
 	user.logout = function (succ){
