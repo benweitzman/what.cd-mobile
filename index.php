@@ -19,12 +19,16 @@
 				<a class="brand" href="#/index">What.CD</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li ng-class="getNavClass('index')"><a href="#/index">Home</a></li>
-						<li ng-class="getNavClass('torrents')"><a href="#/torrents">Torrents</a></li>
-						<li ng-class="getNavClass('forums')" ><a href="#/forums">Forums</a></li>
-						<li ng-class="getNavClass('subscriptions')"><a href="#/subscriptions">Subscriptions</a>
+						<li ng-class="nav.getClass('index')"><a href="#/index" ng-click="nav.setActive('index')">
+							Home</a></li>
+						<li ng-class="nav.getClass('torrents')"><a href="#/torrents" ng-click="nav.setActive('torrents')">
+							Torrents</a></li>
+						<li ng-class="nav.getClass('forums')" ><a href="#/forums" ng-click="nav.setActive('forums')">
+							Forums</a></li>
+						<li ng-class="nav.getClass('subscriptions')"><a href="#/subscriptions" ng-click="nav.setActive('subscriptions')">
+							Subscriptions</a>
 						</li>
-						<li ng-class="getNavClass('inbox')"><a href="#/inbox">Inbox
+						<li ng-class="nav.getClass('inbox')"><a href="#/inbox" ng-click="nav.setActive('inbox')">Inbox
 						<span class="badge badge-info" ng-show="user().notifications.messages > 0">
 								{{user().notifications.messages}}
 						</span>

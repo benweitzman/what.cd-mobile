@@ -126,7 +126,7 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 
 whatMobile.factory("NavBar", function (User){
 	var navbar = {};
-	navbar.active = "";
+	navbar.active = "index";
 
 	navbar.getClass = function (name){
 		if (name === navbar.active)

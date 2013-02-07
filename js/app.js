@@ -13,18 +13,13 @@ whatMobile.config(function($routeProvider, $locationProvider){
 
 //This controller manages the index view, ie. the homepage. Shows announcements, notifications
 //blog, etc
-whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, NavBar){
+whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI){
 	//Redirect to index if not logged in 
 	if (!User.loggedIn){
 		$location.path("/");
 		return;
 	}
 
-	//Setup navbar
-	NavBar.active = "index";
-	//Forward set/get functions for NavBar service
-	$scope.getNavClass = NavBar.getClass;
-	$scope.setActive = NavBar.setActive;
 	$scope.announcements = [];
 	$scope.user = User.response;
 
@@ -43,18 +38,13 @@ whatMobile.controller("IndexCtrl", function ($scope, $location, User, WhatAPI, N
 })
 
 //This controller manages the forum index view
-whatMobile.controller("ForumIndexCtrl", function ($scope, $location, User, WhatAPI, NavBar){
+whatMobile.controller("ForumIndexCtrl", function ($scope, $location, User, WhatAPI){
 	//Redirect to index if not logged in 
 	if (!User.loggedIn){
 		$location.path("/");
 		return;
 	}
 
-	//Setup navbar
-	NavBar.active = "forums";
-	//Forward set/get functions for NavBar service
-	$scope.getNavClass = NavBar.getClass;
-	$scope.setActive = NavBar.setActive;
 	$scope.categories = [];
 
 	WhatAPI.forum({type: "main"}, function (data){
@@ -64,17 +54,13 @@ whatMobile.controller("ForumIndexCtrl", function ($scope, $location, User, WhatA
 })
 
 //Manages viewing a specific forum
-whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, User, WhatAPI, NavBar){
+whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, User, WhatAPI){
 	//Redirect to index if not logged in 
 	if (!User.loggedIn){
 		$location.path("/");
 		return;
 	}
 
-	NavBar.active = "forums";
-	//Forward set/get functions for NavBar service
-	$scope.getNavClass = NavBar.getClass;
-	$scope.setActive = NavBar.setActive;
 	$scope.forum = {};
 
 	WhatAPI.forum({type: "viewforum", forumid: $routeParams.forumid, page: $routeParams.page},
@@ -100,17 +86,13 @@ whatMobile.controller("ForumCtrl", function ($scope, $location, $routeParams, Us
 })
 
 //Manages viewing a thread
-whatMobile.controller("ThreadCtrl", function ($scope, $location, $routeParams, User, WhatAPI, NavBar){
+whatMobile.controller("ThreadCtrl", function ($scope, $location, $routeParams, User, WhatAPI){
 	//Redirect to index if not logged in 
 	if (!User.loggedIn){
 		$location.path("/");
 		return;
 	}
 
-	NavBar.active = "forums";
-	//Forward set/get functions for NavBar service
-	$scope.getNavClass = NavBar.getClass;
-	$scope.setActive = NavBar.setActive;
 	$scope.thread = {};
 
 	WhatAPI.forum({type: "viewthread", threadid: $routeParams.threadid}, function (data){
@@ -120,17 +102,14 @@ whatMobile.controller("ThreadCtrl", function ($scope, $location, $routeParams, U
 })
 
 //Controls user inbox
-whatMobile.controller("InboxCtrl", function ($scope, $location, User, WhatAPI, NavBar){
+whatMobile.controller("InboxCtrl", function ($scope, $location, User, WhatAPI){
 	//Redirect to index if not logged in 
 	if (!User.loggedIn){
 		$location.path("/");
 		return;
 	}
 
-	NavBar.active = "inbox";
 	//Forward set/get functions for NavBar service
-	$scope.getNavClass = NavBar.getClass;
-	$scope.setActive = NavBar.setActive;
 	$scope.inbox = {};
 
 	WhatAPI.inbox({}, function (data){
@@ -157,8 +136,6 @@ whatMobile.controller("InboxCtrl", function ($scope, $location, User, WhatAPI, N
 
 //Controls the navbar
 whatMobile.controller("NavCtrl", function ($scope, $location, User, NavBar){
-	$scope.getNavClass = NavBar.getClass;
-	$scope.setActive = NavBar.setActive;
 	$scope.nav = NavBar;
 	$scope.user = User.info;
 
