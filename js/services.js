@@ -68,18 +68,18 @@ whatMobile.factory("User", function ($http, $location, WhatAPI){
 			success: function (data){
 				//It'd be nice if login status failure also included a field
 				//saying why it failed (bad username/pass/etc)
-				// console.log(data);
-				// if (data.status === "failure" && typeof err === "function")
-				// 	err(data);
-				// else {
-					WhatAPI.index({}, function (idx){
-						console.log(idx);
-						user.response = idx.response;
-						user.loggedIn = true;
-					});
-					if (typeof succ === "function")
-						succ();
-				//}
+				WhatAPI.index({}, function (idx){
+					if (idx.response === undefined){
+						if (typeof err === "function")
+							err();
+						user.loggedIn = false;
+						return;
+					}
+					user.response = idx.response;
+					user.loggedIn = true;
+				});
+				if (typeof succ === "function")
+					succ();
 			},
 			error: function (data){
 				if (typeof err === "function")
