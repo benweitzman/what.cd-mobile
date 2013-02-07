@@ -116,13 +116,18 @@ whatMobile.controller("NavCtrl", function ($scope, $location, NavBar, User){
 //Manages logging in to the site
 whatMobile.controller("LoginCtrl", function ($scope, $location, User){
 	$scope.login = function (username, password){
+		if (username === undefined || username.length === 0 
+			|| password === undefined || password.length === 0)
+		{
+			alert("Error: empty username or password");
+			return;
+		}
 		User.login(username, password, function(){
-			console.log('redirect to index!');
 			$location.path("/index");
 			//We must force a scope update b/c when changing stuff from
 			//external lib (jQuery) sometimes Angular won't notice
 			$scope.$apply();
-		},
+		}, 
 		function (){
 			alert("failed to login");
 		});
