@@ -141,10 +141,10 @@ whatMobile.controller("InboxCtrl", function ($scope, $location, User, WhatAPI, N
 	//I'm not sure if this actually works? It should also be on a user's page
 	//but I'm not sure how to add users to my test gazelle since i don't have any email
 	//sending abilities from my server
-	$scope.sendPM = function (subject, body){
+	$scope.sendPM = function (subject, body, userid){
 		WhatAPI.apiPost("inbox.php", {
 			action: "takecompose", 
-			toid: User.response.id,
+			toid: userid,
 			auth: User.response.authkey,
 			subject: subject,
 			body: body
