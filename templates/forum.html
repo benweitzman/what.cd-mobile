@@ -1,7 +1,7 @@
 <div class="container">
 	<h3><a href="#/forums">Forums</a> > {{forum.forumName}}</h3>
 	<div class="thread" ng-repeat="t in forum.threads">
-		<a ng-href="#/thread/{{t.topicId}}">{{t.title}} (goes nowhere atm)</a>
+		<a ng-href="#/thread/{{t.topicId}}" ng-bind-html="t.title" />
 	</div>
 	<form>
 		<!-- Debug testing of thread creation -->
