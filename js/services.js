@@ -7,7 +7,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 
 	//Perform an API request with action=method, optional parameters
 	//and on success pass the data to callback function
-	wcd.apiRequest = function (method, params, callback){
+	wcd.apiGet = function (method, params, callback){
 		params = params || {};
 		params.action = method;
 		
@@ -24,6 +24,11 @@ whatMobile.factory("WhatAPI", function ($http) {
 				console.log("WhatAPI - " + method + " ERROR: " + xhr.status + " " + thrown);
 			}
 		});
+	}
+
+	//Perform an API post request
+	wcd.apiPost = function (method, params, callback){
+		
 	}
 
 	//Peform a fake api request, getting the data instead from a json file
@@ -44,7 +49,7 @@ whatMobile.factory("WhatAPI", function ($http) {
 
 	methods.forEach(function (method){
 		wcd[method] = function (params, callback){
-			wcd.apiRequest(method, params, callback);
+			wcd.apiGet(method, params, callback);
 		}
 	});
 
